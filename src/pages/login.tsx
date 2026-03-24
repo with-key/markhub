@@ -1,181 +1,107 @@
-import type { FormEvent } from "react";
+import Link from "next/link";
+import { Flex } from "@/components/utils/Flex";
+import { Grid } from "@/components/utils/Grid";
 import {
-  auxiliaryLink,
-  brand,
-  card,
-  divider,
-  dividerLine,
-  field,
-  fieldHeader,
-  footer,
-  footerCopy,
-  footerInner,
-  footerLink,
-  footerNav,
-  form,
-  heading,
-  heroContent,
-  heroDescription,
-  heroFootnote,
-  heroGlow,
-  heroPanel,
-  heroTitle,
-  input,
-  intro,
-  label,
-  loginSection,
-  loginShell,
-  main,
-  mobileBrand,
-  page,
-  signUp,
-  signUpLink,
-  socialButton,
-  socialGrid,
-  socialIcon,
-  subheading,
-  submitButton,
-} from "@/styles/Login.css";
-
-function handleSubmit(event: FormEvent<HTMLFormElement>) {
-  event.preventDefault();
-}
+  authCard,
+  authDescription,
+  authFootnote,
+  authHeading,
+  authHero,
+  authHighlightCard,
+  authHighlightLabel,
+  authHighlightValue,
+  authHighlights,
+  authKicker,
+  authPage,
+  authPanel,
+  authSubheading,
+  authTitle,
+  oauthButton,
+  oauthCaption,
+  oauthLabel,
+  oauthMeta,
+} from "@/styles/app.css";
 
 export default function Login() {
   return (
-    <div className={page}>
-      <main className={main}>
-        <section className={heroPanel} aria-label="Editorial sanctuary introduction">
-          <p className={brand}>The Sanctuary</p>
-          <div className={heroContent}>
-            <h1 className={heroTitle}>
-              The Stoic
-              <br />
-              Curator
-            </h1>
-            <p className={heroDescription}>
-              A professional threshold designed for high-end editorial management.
-              Experience clarity through intentional asymmetry.
-            </p>
-          </div>
-          <p className={heroFootnote}>Premium Workspace © 2024</p>
-          <div className={heroGlow} aria-hidden="true" />
-        </section>
+    <Grid className={authPage} minHeight="screen">
+      <section className={authHero} aria-label="서비스 소개">
+        <Grid gap={6} maxWidth="prose">
+          <p className={authKicker}>PRD 기반 협업 허브</p>
+          <h1 className={authTitle}>
+            에픽, 태스크,
+            <br />
+            문서를 같은 맥락으로
+          </h1>
+          <p className={authDescription}>
+            mdhub는 프로젝트 단위로 기획 문서와 실행 업무를 연결해주는 협업 서비스입니다.
+            로그인 후 내가 생성했거나 속한 프로젝트 목록으로 바로 진입합니다.
+          </p>
+        </Grid>
 
-        <section className={loginSection}>
-          <div className={loginShell}>
-            <p className={mobileBrand}>The Sanctuary</p>
-            <div className={card}>
-              <div className={intro}>
-                <h2 className={heading}>Welcome back</h2>
-                <p className={subheading}>
-                  Enter your credentials to access the sanctuary.
-                </p>
-              </div>
+        <Grid className={authHighlights} gap={4}>
+          <Grid className={authHighlightCard} gap={2}>
+            <p className={authHighlightLabel}>프로젝트 기반</p>
+            <p className={authHighlightValue}>Epic · Task · Docs</p>
+          </Grid>
+          <Grid className={authHighlightCard} gap={2}>
+            <p className={authHighlightLabel}>검색 제한</p>
+            <p className={authHighlightValue}>현재 프로젝트 내부만</p>
+          </Grid>
+          <Grid className={authHighlightCard} gap={2}>
+            <p className={authHighlightLabel}>문서 편집</p>
+            <p className={authHighlightValue}>Split View Preview</p>
+          </Grid>
+        </Grid>
+      </section>
 
-              <form className={form} onSubmit={handleSubmit}>
-                <div className={field}>
-                  <label className={label} htmlFor="email">
-                    Email Address
-                  </label>
-                  <input
-                    className={input}
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="name@sanctuary.com"
-                  />
-                </div>
-
-                <div className={field}>
-                  <div className={fieldHeader}>
-                    <label className={label} htmlFor="password">
-                      Password
-                    </label>
-                    <a className={auxiliaryLink} href="#">
-                      Forgot password?
-                    </a>
-                  </div>
-                  <input
-                    className={input}
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    placeholder="••••••••"
-                  />
-                </div>
-
-                <button className={submitButton} type="submit">
-                  Sign In
-                </button>
-              </form>
-
-              <div className={divider}>
-                <span className={dividerLine} aria-hidden="true" />
-                <span>Or continue with</span>
-                <span className={dividerLine} aria-hidden="true" />
-              </div>
-
-              <div className={socialGrid}>
-                <button className={socialButton} type="button" aria-label="Continue with GitHub">
-                  <svg className={socialIcon} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.46 11.46 0 0 1 12 5.8c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.8 24 17.302 24 12 24 5.373 18.627 0 12 0Z" />
-                  </svg>
-                  GitHub
-                </button>
-
-                <button className={socialButton} type="button" aria-label="Continue with Google">
-                  <svg className={socialIcon} viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09Z"
-                      fill="#4285F4"
-                    />
-                    <path
-                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23Z"
-                      fill="#34A853"
-                    />
-                    <path
-                      d="M5.84 14.09A6.96 6.96 0 0 1 5.49 12c0-.73.13-1.43.35-2.09V7.07H2.18A11.94 11.94 0 0 0 1 12c0 1.78.43 3.45 1.18 4.93l3.66-2.84Z"
-                      fill="#FBBC05"
-                    />
-                    <path
-                      d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53Z"
-                      fill="#EA4335"
-                    />
-                  </svg>
-                  Google
-                </button>
-              </div>
-
-              <p className={signUp}>
-                Don&apos;t have an account?
-                <a className={signUpLink} href="#">
-                  Sign up
-                </a>
+      <section className={authPanel}>
+        <Grid className={authCard}>
+          <Grid gap={4}>
+            <Grid gap={4}>
+              <h2 className={authHeading}>소셜 계정으로 시작</h2>
+              <p className={authSubheading}>
+                GitHub 또는 Google 계정으로 로그인하고 프로젝트 협업 공간으로
+                이동합니다.
               </p>
-            </div>
-          </div>
-        </section>
-      </main>
+            </Grid>
 
-      <footer className={footer}>
-        <div className={footerInner}>
-          <p className={footerCopy}>© 2024 The Editorial Sanctuary. All rights reserved.</p>
-          <nav className={footerNav} aria-label="Footer navigation">
-            <a className={footerLink} href="#">
-              Privacy Policy
-            </a>
-            <a className={footerLink} href="#">
-              Terms of Service
-            </a>
-            <a className={footerLink} href="#">
-              Contact
-            </a>
-          </nav>
-        </div>
-      </footer>
-    </div>
+            <Flex
+              render={<button type="button" />}
+              className={oauthButton}
+              alignItems="center"
+              justifyContent="space-between"
+              aria-label="Continue with GitHub"
+            >
+              <Grid className={oauthMeta} gap={0}>
+                <span className={oauthLabel}>GitHub로 계속하기</span>
+                <span className={oauthCaption}>개발 협업 흐름과 연결된 팀에 적합</span>
+              </Grid>
+              <span>01</span>
+            </Flex>
+
+            <Flex
+              render={<button type="button" />}
+              className={oauthButton}
+              alignItems="center"
+              justifyContent="space-between"
+              aria-label="Continue with Google"
+            >
+              <Grid className={oauthMeta} gap={0}>
+                <span className={oauthLabel}>Google로 계속하기</span>
+                <span className={oauthCaption}>문서 협업 중심의 팀에 적합</span>
+              </Grid>
+              <span>02</span>
+            </Flex>
+
+            <p className={authFootnote}>
+              최초 로그인 시 프로필을 생성하고, 이후 내가 소속된 프로젝트 목록으로
+              이동합니다. 데모 화면은 <Link href="/">프로젝트 목록</Link>에서 확인할 수
+              있습니다.
+            </p>
+          </Grid>
+        </Grid>
+      </section>
+    </Grid>
   );
 }
