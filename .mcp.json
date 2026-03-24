@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+      "inflearn": {
+        "type": "http",
+        "url": "https://inflearn-mcp.devkey.workers.dev/mcp"
+      }
+    }
+  }
