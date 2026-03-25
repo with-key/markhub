@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-
 import { prose } from "@/styles/app.css";
 
 type MarkdownPreviewProps = {

@@ -1,72 +1,90 @@
-import type { ReactNode } from "react";
+import type { ComponentProps } from "react";
 
 import { AlertDialog as BaseAlertDialog } from "@/components/shared/base-ui";
-import { CloseIcon } from "@/components/shared/icons";
-import { Button } from "@/components/button";
+import { cx } from "@/components/shared/cx";
 import {
-  accentBlock,
   backdrop,
-  body,
-  closeButton,
-  dangerPopup,
   description,
-  footer,
-  header,
   popup,
   title,
-  titleRow,
   viewport,
 } from "@/components/shared/dialog.css";
 
-export type AlertDialogProps = {
-  bodyText: string;
-  cancelLabel?: string;
-  children?: ReactNode;
-  confirmLabel?: string;
-  onConfirm?: () => void;
-  title: string;
-  triggerLabel: string;
+type AlertDialogRootProps = BaseAlertDialog.Root.Props;
+type AlertDialogTriggerProps = BaseAlertDialog.Trigger.Props;
+type AlertDialogPortalProps = BaseAlertDialog.Portal.Props;
+type AlertDialogBackdropProps = BaseAlertDialog.Backdrop.Props;
+type AlertDialogViewportProps = BaseAlertDialog.Viewport.Props;
+type AlertDialogPopupProps = BaseAlertDialog.Popup.Props;
+type AlertDialogTitleProps = BaseAlertDialog.Title.Props;
+type AlertDialogDescriptionProps = BaseAlertDialog.Description.Props;
+type AlertDialogCloseProps = BaseAlertDialog.Close.Props;
+
+function mergeClassName<State>(
+  defaultClassName: string,
+  className?: string | ((state: State) => string | undefined),
+) {
+  if (typeof className === "function") {
+    return (state: State) => cx(defaultClassName, className(state));
+  }
+
+  return cx(defaultClassName, className);
+}
+
+function Root(props: AlertDialogRootProps) {
+  return <BaseAlertDialog.Root {...props} />;
+}
+
+const Trigger = BaseAlertDialog.Trigger;
+
+function Portal({ ref, ...props }: ComponentProps<typeof BaseAlertDialog.Portal>) {
+  return <BaseAlertDialog.Portal ref={ref} {...props} />;
+}
+
+function Backdrop({ className, ref, ...props }: ComponentProps<typeof BaseAlertDialog.Backdrop>) {
+  return <BaseAlertDialog.Backdrop ref={ref} className={mergeClassName(backdrop, className)} {...props} />;
+}
+
+function Viewport({ className, ref, ...props }: ComponentProps<typeof BaseAlertDialog.Viewport>) {
+  return <BaseAlertDialog.Viewport ref={ref} className={mergeClassName(viewport, className)} {...props} />;
+}
+
+function Popup({ className, ref, ...props }: ComponentProps<typeof BaseAlertDialog.Popup>) {
+  return <BaseAlertDialog.Popup ref={ref} className={mergeClassName(popup, className)} {...props} />;
+}
+
+function Title({ className, ref, ...props }: ComponentProps<typeof BaseAlertDialog.Title>) {
+  return <BaseAlertDialog.Title ref={ref} className={mergeClassName(title, className)} {...props} />;
+}
+
+function Description({ className, ref, ...props }: ComponentProps<typeof BaseAlertDialog.Description>) {
+  return <BaseAlertDialog.Description ref={ref} className={mergeClassName(description, className)} {...props} />;
+}
+
+function Close({ ref, ...props }: ComponentProps<typeof BaseAlertDialog.Close>) {
+  return <BaseAlertDialog.Close ref={ref} {...props} />;
+}
+
+export const AlertDialog = {
+  Root,
+  Trigger,
+  Portal,
+  Backdrop,
+  Viewport,
+  Popup,
+  Title,
+  Description,
+  Close,
 };
 
-export function AlertDialog({
-  bodyText,
-  cancelLabel = "돌아가기",
-  children,
-  confirmLabel = "계속 진행",
-  onConfirm,
-  title: heading,
-  triggerLabel,
-}: AlertDialogProps) {
-  return (
-    <BaseAlertDialog.Root>
-      <BaseAlertDialog.Trigger render={<Button variant="ghost" />}>{triggerLabel}</BaseAlertDialog.Trigger>
-      <BaseAlertDialog.Portal>
-        <BaseAlertDialog.Backdrop className={backdrop} />
-        <BaseAlertDialog.Viewport className={viewport}>
-          <BaseAlertDialog.Popup className={`${popup} ${dangerPopup}`}>
-            <div className={header}>
-              <div className={titleRow}>
-                <BaseAlertDialog.Title className={title}>{heading}</BaseAlertDialog.Title>
-                <BaseAlertDialog.Close className={closeButton} aria-label="닫기">
-                  <CloseIcon style={{ width: 16, height: 16 }} />
-                </BaseAlertDialog.Close>
-              </div>
-              <BaseAlertDialog.Description className={description}>{bodyText}</BaseAlertDialog.Description>
-            </div>
-
-            <div className={body}>
-              {children ? children : <div className={accentBlock}>되돌리기 어려운 작업에는 한 번 더 맥락을 보여주는 것이 안전합니다.</div>}
-            </div>
-
-            <div className={footer}>
-              <BaseAlertDialog.Close render={<Button variant="ghost" />}>{cancelLabel}</BaseAlertDialog.Close>
-              <BaseAlertDialog.Close render={<Button variant="danger" />} onClick={onConfirm}>
-                {confirmLabel}
-              </BaseAlertDialog.Close>
-            </div>
-          </BaseAlertDialog.Popup>
-        </BaseAlertDialog.Viewport>
-      </BaseAlertDialog.Portal>
-    </BaseAlertDialog.Root>
-  );
-}
+export type {
+  AlertDialogBackdropProps,
+  AlertDialogCloseProps,
+  AlertDialogDescriptionProps,
+  AlertDialogPopupProps,
+  AlertDialogPortalProps,
+  AlertDialogRootProps,
+  AlertDialogTitleProps,
+  AlertDialogTriggerProps,
+  AlertDialogViewportProps,
+};

@@ -1,13 +1,21 @@
 import { style } from "@vanilla-extract/css";
 
 import { vars } from "@/styles/global.css";
+import { bodyMd, bodySm, titleSm } from "@/styles/typography.css";
 
 export const backdrop = style({
   position: "fixed",
   inset: 0,
-  background: "rgba(7, 17, 31, 0.42)",
-  backdropFilter: "blur(10px)",
+  background: "rgba(9, 9, 11, 0.42)",
+  backdropFilter: "blur(6px)",
   zIndex: 40,
+  transition: "opacity 160ms ease, backdrop-filter 160ms ease",
+  selectors: {
+    '&[data-starting-style], &[data-ending-style]': {
+      opacity: 0,
+      backdropFilter: "blur(0px)",
+    },
+  },
 });
 
 export const viewport = style({
@@ -15,19 +23,35 @@ export const viewport = style({
   inset: 0,
   display: "grid",
   placeItems: "center",
-  padding: "24px",
+  padding: vars.space[4],
   zIndex: 41,
+  overflowY: "auto",
+  "@media": {
+    "screen and (min-width: 768px)": {
+      padding: vars.space[6],
+    },
+  },
 });
 
 export const popup = style({
-  width: "min(560px, calc(100vw - 32px))",
+  width: `min(560px, calc(100vw - ${vars.space[6]}))`,
+  maxWidth: "100%",
+  maxHeight: "calc(100dvh - 48px)",
   display: "grid",
-  gap: "18px",
-  padding: "24px",
-  border: `1px solid ${vars.color.border}`,
+  gap: vars.space[5],
+  padding: vars.space[6],
+  border: `1px solid ${vars.color.outlineVariant}`,
   borderRadius: vars.radius["2xl"],
-  background: "color-mix(in srgb, var(--surface) 96%, transparent)",
+  background: vars.color.surface,
   boxShadow: vars.shadow.elevated,
+  overflow: "auto",
+  transition: "transform 160ms ease, opacity 160ms ease",
+  selectors: {
+    '&[data-starting-style], &[data-ending-style]': {
+      opacity: 0,
+      transform: "translateY(8px) scale(0.985)",
+    },
+  },
 });
 
 export const dangerPopup = style({
@@ -36,45 +60,42 @@ export const dangerPopup = style({
 
 export const header = style({
   display: "grid",
-  gap: "8px",
+  gap: vars.space[2],
 });
 
 export const titleRow = style({
   display: "flex",
   alignItems: "start",
   justifyContent: "space-between",
-  gap: "16px",
+  gap: vars.space[4],
 });
 
-export const title = style({
+export const title = style([titleSm, {
   margin: 0,
-  fontFamily: vars.font.display,
-  fontSize: "1.35rem",
-  fontWeight: 700,
-  letterSpacing: "-0.04em",
-});
+}]);
 
-export const description = style({
+export const description = style([bodyMd, {
   margin: 0,
   color: vars.color.muted,
-  lineHeight: 1.65,
-});
+}]);
 
 export const body = style({
   display: "grid",
-  gap: "16px",
+  gap: vars.space[4],
 });
 
 export const footer = style({
   display: "flex",
   justifyContent: "flex-end",
-  gap: "12px",
+  gap: vars.space[3],
   flexWrap: "wrap",
+  paddingTop: vars.space[2],
 });
 
 export const closeButton = style({
   width: "36px",
   height: "36px",
+  flexShrink: 0,
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.pill,
   background: "transparent",
@@ -82,13 +103,24 @@ export const closeButton = style({
   display: "grid",
   placeItems: "center",
   cursor: "pointer",
+  transition: "background-color 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease",
+  selectors: {
+    "&:hover": {
+      background: vars.color.surfaceRaised,
+      borderColor: vars.color.outlineVariant,
+      color: vars.color.foreground,
+    },
+    "&:focus-visible": {
+      outline: `2px solid ${vars.color.surfaceTint}`,
+      outlineOffset: "2px",
+    },
+  },
 });
 
-export const accentBlock = style({
-  padding: "14px 16px",
+export const accentBlock = style([bodySm, {
+  padding: `${vars.space[3]} ${vars.space[4]}`,
   borderRadius: vars.radius.lg,
+  border: `1px solid ${vars.color.outlineVariant}`,
   background: vars.color.surfaceRaised,
   color: vars.color.muted,
-  fontSize: "0.92rem",
-  lineHeight: 1.6,
-});
+}]);

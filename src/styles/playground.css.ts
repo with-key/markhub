@@ -1,192 +1,169 @@
+import { vars } from "@/styles/global.css";
+import { bodyMd, titleMd } from "@/styles/typography.css";
 import { style } from "@vanilla-extract/css";
 
-import { vars } from "@/styles/global.css";
-
-export const layout = style({
-  display: "grid",
-  gap: vars.space[6],
-});
-
-export const heroGrid = style({
-  display: "grid",
-  gap: vars.space[4],
-  gridTemplateColumns: "minmax(0, 1.35fr) minmax(280px, 0.65fr)",
-  "@media": {
-    "screen and (max-width: 1080px)": {
-      gridTemplateColumns: "1fr",
-    },
-  },
-});
-
-export const noteCard = style({
-  display: "grid",
-  gap: vars.space[4],
-  alignContent: "start",
-  minHeight: "100%",
-});
-
-export const introTitle = style({
-  margin: 0,
-  fontFamily: vars.font.display,
-  fontSize: "1.7rem",
-  letterSpacing: "-0.04em",
-});
-
-export const introBody = style({
-  margin: 0,
-  color: vars.color.muted,
-  lineHeight: 1.75,
-});
-
-export const statusList = style({
-  display: "grid",
-  gap: vars.space[3],
-});
-
-export const statusItem = style({
-  display: "grid",
-  gap: "6px",
-  padding: vars.space[4],
-  border: `1px solid ${vars.color.border}`,
-  borderRadius: vars.radius.lg,
-  background: vars.color.surfaceRaised,
-});
-
-export const statusLabel = style({
-  margin: 0,
-  color: vars.color.muted,
-  fontSize: "0.82rem",
-  fontWeight: 600,
-  textTransform: "uppercase",
-  letterSpacing: "0.08em",
-});
-
-export const statusValue = style({
-  margin: 0,
-  fontFamily: vars.font.display,
-  fontSize: "1.15rem",
-  fontWeight: 700,
-  letterSpacing: "-0.03em",
-});
-
-export const statusHint = style({
-  margin: 0,
-  color: vars.color.muted,
-  fontSize: "0.9rem",
-  lineHeight: 1.6,
-});
-
-export const sectionStack = style({
+export const page = style({
   display: "grid",
   gap: vars.space[5],
+  padding: vars.space[6],
 });
 
-export const responsiveGrid = style({
+export const toolbar = style({
   display: "grid",
   gap: vars.space[4],
-  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-  "@media": {
-    "screen and (max-width: 980px)": {
-      gridTemplateColumns: "1fr",
-    },
-  },
+  position: "sticky",
+  top: vars.space[4],
+  zIndex: 1,
 });
 
-export const buttonRow = style({
+export const toolbarTitle = style([
+  titleMd,
+  {
+    margin: 0,
+  },
+]);
+
+export const toolbarHint = style([
+  bodyMd,
+  {
+    margin: `${vars.space[2]} 0 0`,
+    color: vars.color.muted,
+  },
+]);
+
+export const chipRow = style({
   display: "flex",
   flexWrap: "wrap",
-  gap: vars.space[3],
+  gap: vars.space[2],
 });
 
-export const buttonStack = style({
-  display: "grid",
-  gap: vars.space[3],
-});
-
-export const panelLabel = style({
-  margin: 0,
-  color: vars.color.muted,
-  fontSize: "0.82rem",
-  fontWeight: 700,
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-});
-
-export const miniGrid = style({
-  display: "grid",
-  gap: vars.space[3],
-  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-  "@media": {
-    "screen and (max-width: 860px)": {
-      gridTemplateColumns: "1fr",
+export const chip = style({
+  appearance: "none",
+  border: `1px solid ${vars.color.border}`,
+  borderRadius: vars.radius.pill,
+  background: vars.color.surface,
+  color: vars.color.foreground,
+  cursor: "pointer",
+  font: "inherit",
+  fontSize: vars.text.size.sm,
+  fontWeight: vars.text.weight.semibold,
+  lineHeight: vars.text.lineHeight.heading,
+  padding: "10px 14px",
+  transition:
+    "background-color 140ms ease, border-color 140ms ease, color 140ms ease",
+  selectors: {
+    "&:hover": {
+      borderColor: vars.color.outline,
     },
   },
 });
 
-export const surfacePreview = style({
-  minHeight: "120px",
+export const chipActive = style({
+  background: vars.color.accentSoft,
+  borderColor: vars.color.accent,
+  color: vars.color.accentStrong,
+});
+
+export const sectionList = style({
+  display: "grid",
+  gap: vars.space[4],
+});
+
+export const previewSection = style({
+  display: "grid",
+  gap: vars.space[4],
+  scrollMarginTop: "120px",
+});
+
+export const componentStack = style({
+  display: "grid",
+  gap: vars.space[4],
+});
+
+export const previewGrid = style({
+  display: "grid",
+  gap: vars.space[3],
+});
+
+export const componentGrid = style({
+  display: "grid",
+  gap: vars.space[3],
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+});
+
+export const canvasCard = style({
+  minHeight: "100%",
   display: "grid",
   gap: vars.space[3],
   alignContent: "start",
 });
 
-export const surfaceTitle = style({
-  margin: 0,
-  fontWeight: 700,
-});
-
-export const surfaceText = style({
-  margin: 0,
-  color: vars.color.muted,
-  lineHeight: 1.65,
-});
-
-export const formGrid = style({
-  display: "grid",
-  gap: vars.space[4],
-  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-  "@media": {
-    "screen and (max-width: 980px)": {
-      gridTemplateColumns: "1fr",
-    },
+export const metaText = style([
+  bodyMd,
+  {
+    margin: 0,
+    color: vars.color.muted,
   },
-});
+]);
 
-export const fullSpan = style({
-  gridColumn: "1 / -1",
-});
-
-export const metaCard = style({
+export const utilityGrid = style({
   display: "grid",
   gap: vars.space[3],
-  padding: vars.space[5],
-  border: `1px dashed ${vars.color.outlineVariant}`,
-  borderRadius: vars.radius.xl,
-  background: "color-mix(in srgb, var(--surface) 88%, transparent)",
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
 });
 
-export const codeLine = style({
-  margin: 0,
-  fontFamily: vars.font.mono,
-  fontSize: "0.9rem",
-  lineHeight: 1.7,
-});
-
-export const utilityTile = style({
-  padding: vars.space[4],
+export const utilityBlock = style({
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.lg,
   background: vars.color.surface,
   boxShadow: vars.shadow.soft,
 });
 
-export const utilityTitle = style({
-  margin: "0 0 6px",
-  fontWeight: 700,
+export const typographyStack = style({
+  display: "grid",
+  gap: vars.space[4],
 });
 
-export const utilityText = style({
-  margin: 0,
+export const typographyGrid = style({
+  display: "grid",
+  gap: vars.space[3],
+  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+});
+
+export const typographyCard = style({
+  display: "grid",
+  gap: vars.space["3"],
+  minHeight: "100%",
+});
+
+export const typographyMeta = style({
+  display: "grid",
+  gap: "4px",
+  paddingBottom: vars.space[3],
+  borderBottom: `1px solid ${vars.color.border}`,
+});
+
+export const typographyToken = style({
   color: vars.color.muted,
-  lineHeight: 1.6,
+  fontFamily: vars.font.mono,
+  fontSize: vars.text.size.xs,
+  lineHeight: vars.text.lineHeight.relaxed,
+  fontVariantLigatures: "none",
+});
+
+export const typographySpec = style({
+  color: vars.color.muted,
+  fontSize: vars.text.size.sm,
+  lineHeight: vars.text.lineHeight.body,
+});
+
+export const typographySample = style({
+  margin: 0,
+  color: vars.color.foreground,
+});
+
+export const typographyBodySample = style({
+  margin: 0,
+  maxWidth: "50ch",
+  color: vars.color.foreground,
 });

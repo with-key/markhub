@@ -1,4 +1,4 @@
-import { Radio, RadioGroup } from "@/components/shared/base-ui";
+import { Radio as BaseRadio, RadioGroup as BaseRadioGroup } from "@/components/shared/base-ui";
 import {
   choiceContent,
   choiceDescription,
@@ -14,26 +14,20 @@ import { CircleIcon } from "@/components/shared/icons";
 
 import { indicator, radio } from "./RadioGroupField.css";
 
-export type RadioGroupFieldOption = {
+export type RadioGroupOption = {
   description?: string;
   label: string;
   value: string;
 };
 
-export type RadioGroupFieldProps = {
-  defaultValue?: string;
+export type RadioGroupProps = Omit<BaseRadioGroup.Props<string>, "children"> & {
   description?: string;
-  disabled?: boolean;
   error?: string;
   label: string;
-  name?: string;
-  onValueChange?: (value: string) => void;
-  options: RadioGroupFieldOption[];
-  required?: boolean;
-  value?: string;
+  options: RadioGroupOption[];
 };
 
-export function RadioGroupField({
+export function RadioGroup({
   defaultValue,
   description,
   disabled,
@@ -44,7 +38,7 @@ export function RadioGroupField({
   options,
   required,
   value,
-}: RadioGroupFieldProps) {
+}: RadioGroupProps) {
   return (
     <div className={fieldRoot}>
       <p className={fieldLabel}>
@@ -53,7 +47,7 @@ export function RadioGroupField({
       </p>
       {description ? <p className={fieldDescription}>{description}</p> : null}
 
-      <RadioGroup
+      <BaseRadioGroup
         defaultValue={defaultValue}
         disabled={disabled}
         name={name}
@@ -64,11 +58,11 @@ export function RadioGroupField({
         <div className={optionGroup}>
           {options.map((option) => (
             <label key={option.value} className={optionCard}>
-              <Radio.Root className={radio} value={option.value}>
-                <Radio.Indicator className={indicator}>
+              <BaseRadio.Root className={radio} value={option.value}>
+                <BaseRadio.Indicator className={indicator}>
                   <CircleIcon />
-                </Radio.Indicator>
-              </Radio.Root>
+                </BaseRadio.Indicator>
+              </BaseRadio.Root>
 
               <span className={choiceContent}>
                 <span className={choiceTitle}>{option.label}</span>
@@ -79,7 +73,7 @@ export function RadioGroupField({
             </label>
           ))}
         </div>
-      </RadioGroup>
+      </BaseRadioGroup>
 
       {error ? <p className={fieldError}>{error}</p> : null}
     </div>

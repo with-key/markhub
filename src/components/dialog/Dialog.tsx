@@ -1,75 +1,89 @@
-import type { ReactNode } from "react";
-
+import type { ComponentProps } from "react";
 import { BaseDialog } from "@/components/shared/base-ui";
-import { CloseIcon } from "@/components/shared/icons";
-import { Button } from "@/components/button";
+import { cx } from "@/components/shared/cx";
 import {
-  accentBlock,
   backdrop,
-  body,
-  closeButton,
   description,
-  footer,
-  header,
   popup,
   title,
-  titleRow,
   viewport,
 } from "@/components/shared/dialog.css";
 
-export type DialogProps = {
-  bodyText?: string;
-  children?: ReactNode;
-  defaultOpen?: boolean;
-  footerActions?: ReactNode;
-  onOpenChange?: (open: boolean) => void;
-  title: string;
-  triggerLabel: string;
+type DialogRootProps = BaseDialog.Root.Props;
+type DialogTriggerProps = BaseDialog.Trigger.Props;
+type DialogPortalProps = BaseDialog.Portal.Props;
+type DialogBackdropProps = BaseDialog.Backdrop.Props;
+type DialogViewportProps = BaseDialog.Viewport.Props;
+type DialogPopupProps = BaseDialog.Popup.Props;
+type DialogTitleProps = BaseDialog.Title.Props;
+type DialogDescriptionProps = BaseDialog.Description.Props;
+type DialogCloseProps = BaseDialog.Close.Props;
+
+function mergeClassName<State>(
+  defaultClassName: string,
+  className?: string | ((state: State) => string | undefined),
+) {
+  if (typeof className === "function") {
+    return (state: State) => cx(defaultClassName, className(state));
+  }
+
+  return cx(defaultClassName, className);
+}
+
+function Root(props: DialogRootProps) {
+  return <BaseDialog.Root {...props} />;
+}
+
+const Trigger = BaseDialog.Trigger;
+
+function Portal({ ref, ...props }: ComponentProps<typeof BaseDialog.Portal>) {
+  return <BaseDialog.Portal ref={ref} {...props} />;
+}
+
+function Backdrop({ className, ref, ...props }: ComponentProps<typeof BaseDialog.Backdrop>) {
+  return <BaseDialog.Backdrop ref={ref} className={mergeClassName(backdrop, className)} {...props} />;
+}
+
+function Viewport({ className, ref, ...props }: ComponentProps<typeof BaseDialog.Viewport>) {
+  return <BaseDialog.Viewport ref={ref} className={mergeClassName(viewport, className)} {...props} />;
+}
+
+function Popup({ className, ref, ...props }: ComponentProps<typeof BaseDialog.Popup>) {
+  return <BaseDialog.Popup ref={ref} className={mergeClassName(popup, className)} {...props} />;
+}
+
+function Title({ className, ref, ...props }: ComponentProps<typeof BaseDialog.Title>) {
+  return <BaseDialog.Title ref={ref} className={mergeClassName(title, className)} {...props} />;
+}
+
+function Description({ className, ref, ...props }: ComponentProps<typeof BaseDialog.Description>) {
+  return <BaseDialog.Description ref={ref} className={mergeClassName(description, className)} {...props} />;
+}
+
+function Close({ ref, ...props }: ComponentProps<typeof BaseDialog.Close>) {
+  return <BaseDialog.Close ref={ref} {...props} />;
+}
+
+export  {
+  Root,
+  Trigger,
+  Portal,
+  Backdrop,
+  Viewport,
+  Popup,
+  Title,
+  Description,
+  Close,
 };
 
-export function Dialog({
-  bodyText,
-  children,
-  defaultOpen,
-  footerActions,
-  onOpenChange,
-  title: heading,
-  triggerLabel,
-}: DialogProps) {
-  return (
-    <BaseDialog.Root defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
-      <BaseDialog.Trigger render={<Button variant="secondary" />}>{triggerLabel}</BaseDialog.Trigger>
-      <BaseDialog.Portal>
-        <BaseDialog.Backdrop className={backdrop} />
-        <BaseDialog.Viewport className={viewport}>
-          <BaseDialog.Popup className={popup}>
-            <div className={header}>
-              <div className={titleRow}>
-                <BaseDialog.Title className={title}>{heading}</BaseDialog.Title>
-                <BaseDialog.Close className={closeButton} aria-label="닫기">
-                  <CloseIcon style={{ width: 16, height: 16 }} />
-                </BaseDialog.Close>
-              </div>
-              {bodyText ? <BaseDialog.Description className={description}>{bodyText}</BaseDialog.Description> : null}
-            </div>
-
-            <div className={body}>
-              {children ? children : <div className={accentBlock}>핵심 설정과 주의사항을 빠르게 확인할 수 있는 조용한 모달 패턴입니다.</div>}
-            </div>
-
-            <div className={footer}>
-              {footerActions ? (
-                footerActions
-              ) : (
-                <>
-                  <BaseDialog.Close render={<Button variant="ghost" />}>취소</BaseDialog.Close>
-                  <BaseDialog.Close render={<Button />}>확인</BaseDialog.Close>
-                </>
-              )}
-            </div>
-          </BaseDialog.Popup>
-        </BaseDialog.Viewport>
-      </BaseDialog.Portal>
-    </BaseDialog.Root>
-  );
-}
+export type {
+  DialogBackdropProps,
+  DialogCloseProps,
+  DialogDescriptionProps,
+  DialogPopupProps,
+  DialogPortalProps,
+  DialogRootProps,
+  DialogTitleProps,
+  DialogTriggerProps,
+  DialogViewportProps,
+};

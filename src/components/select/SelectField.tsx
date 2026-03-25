@@ -1,4 +1,5 @@
-import { Select } from "@/components/shared/base-ui";
+import { Select as BaseSelect } from "@/components/shared/base-ui";
+import { SelectPrimitive } from "./Select";
 import {
   emptyState,
   icon,
@@ -22,28 +23,24 @@ import {
 } from "@/components/shared/field.css";
 import { CheckIcon, ChevronDownIcon } from "@/components/shared/icons";
 
-export type SelectFieldItem = {
+export type SelectItem = {
   description?: string;
   label: string;
   value: string;
 };
 
-export type SelectFieldProps = {
-  defaultValue?: string | null;
+export type SelectProps = Omit<
+  BaseSelect.Root.Props<string | null>,
+  "children" | "className" | "items"
+> & {
   description?: string;
-  disabled?: boolean;
   error?: string;
-  id?: string;
-  items: SelectFieldItem[];
+  items: SelectItem[];
   label: string;
-  name?: string;
-  onValueChange?: (value: string | null) => void;
   placeholder?: string;
-  required?: boolean;
-  value?: string | null;
 };
 
-export function SelectField({
+export function Select({
   defaultValue,
   description,
   disabled,
@@ -56,11 +53,11 @@ export function SelectField({
   placeholder: placeholderText = "항목을 선택하세요",
   required,
   value: selectedValue,
-}: SelectFieldProps) {
+}: SelectProps) {
   const itemLabels = Object.fromEntries(items.map((item) => [item.value, item.label]));
 
   return (
-    <Select.Root
+    <SelectPrimitive.Root
       defaultValue={defaultValue}
       disabled={disabled}
       id={id}
@@ -71,45 +68,45 @@ export function SelectField({
       value={selectedValue}
     >
       <div className={fieldRoot}>
-        <Select.Label className={fieldLabel}>
+        <SelectPrimitive.Label className={fieldLabel}>
           {label}
           {required ? " *" : null}
-        </Select.Label>
+        </SelectPrimitive.Label>
         {description ? <p className={fieldDescription}>{description}</p> : null}
-        <Select.Trigger className={trigger}>
-          <Select.Value
+        <SelectPrimitive.Trigger className={trigger}>
+          <SelectPrimitive.Value
             className={value}
             placeholder={<span className={placeholder}>{placeholderText}</span>}
           />
-          <Select.Icon>
+          <SelectPrimitive.Icon>
             <ChevronDownIcon className={icon} />
-          </Select.Icon>
-        </Select.Trigger>
+          </SelectPrimitive.Icon>
+        </SelectPrimitive.Trigger>
         {error ? <p className={fieldError}>{error}</p> : null}
       </div>
 
-      <Select.Portal>
-        <Select.Positioner className={positioner} sideOffset={8}>
-          <Select.Popup className={popup}>
-            <Select.List className={list}>
+      <SelectPrimitive.Portal>
+        <SelectPrimitive.Positioner className={positioner} sideOffset={8}>
+          <SelectPrimitive.Popup className={popup}>
+            <SelectPrimitive.List className={list}>
               {items.length === 0 ? <div className={emptyState}>선택 가능한 항목이 없습니다.</div> : null}
               {items.map((item) => (
-                <Select.Item key={item.value} className={listItem} value={item.value}>
+                <SelectPrimitive.Item key={item.value} className={listItem} value={item.value}>
                   <span className={listItemBody}>
                     <span className={listItemLabel}>{item.label}</span>
                     {item.description ? (
                       <span className={listItemDescription}>{item.description}</span>
                     ) : null}
                   </span>
-                  <Select.ItemIndicator className={listItemIndicator}>
+                  <SelectPrimitive.ItemIndicator className={listItemIndicator}>
                     <CheckIcon />
-                  </Select.ItemIndicator>
-                </Select.Item>
+                  </SelectPrimitive.ItemIndicator>
+                </SelectPrimitive.Item>
               ))}
-            </Select.List>
-          </Select.Popup>
-        </Select.Positioner>
-      </Select.Portal>
-    </Select.Root>
+            </SelectPrimitive.List>
+          </SelectPrimitive.Popup>
+        </SelectPrimitive.Positioner>
+      </SelectPrimitive.Portal>
+    </SelectPrimitive.Root>
   );
 }

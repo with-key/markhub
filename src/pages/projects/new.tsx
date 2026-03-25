@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SectionHeader, Surface, TextAreaField, TextField } from "@/components";
+import { SectionHeader, Surface, TextArea, TextField } from "@/components";
 import {
   actionRow,
   dashboardPage,
@@ -56,7 +56,7 @@ export default function NewProjectPage() {
           </div>
 
           <div style={{ marginTop: "16px" }}>
-            <TextAreaField
+            <TextArea
               id="project-description"
               defaultValue="신규 협업 허브의 문서, 에픽, 태스크를 연결해 운영하기 위한 프로젝트입니다."
               label="프로젝트 설명"

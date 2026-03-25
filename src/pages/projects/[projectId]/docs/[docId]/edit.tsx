@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AppShell, MarkdownPreview, SectionHeader, Surface, TextAreaField, TextField } from "@/components";
+import { AppShell, MarkdownPreview, SectionHeader, Surface, TextArea, TextField } from "@/components";
 import { getDocument, getProject } from "@/lib/mockData";
 import {
   chip,
@@ -47,7 +47,7 @@ export function DocumentEditPage({
       <section className={markdownGrid}>
         <div className={editorPane}>
           <h3 className={editorTitle}>Markdown Editor</h3>
-          <TextAreaField
+          <TextArea
             className={markdownTextarea}
             defaultValue={document.content}
             label="문서 본문"

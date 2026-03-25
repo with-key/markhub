@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AppShell, SectionHeader, Surface, TextAreaField, TextField } from "@/components";
+import { AppShell, SectionHeader, Surface, TextArea, TextField } from "@/components";
 import { getProject } from "@/lib/mockData";
 import {
   actionRow,
@@ -35,7 +35,7 @@ export function NewDocumentPage({ projectId = "aurora-hq" }: NewDocumentProps) {
           required
         />
         <div style={{ marginTop: "16px" }}>
-          <TextAreaField
+          <TextArea
             id="doc-body"
             defaultValue="# 새 문서
 

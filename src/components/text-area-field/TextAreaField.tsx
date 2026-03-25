@@ -10,14 +10,14 @@ import {
 
 import { textArea } from "./TextAreaField.css";
 
-export interface TextAreaFieldProps
+export interface TextAreaProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "children"> {
   description?: string;
   error?: string;
   label: string;
 }
 
-export function TextAreaField({
+export function TextArea({
   description,
   error,
   id,
@@ -25,7 +25,7 @@ export function TextAreaField({
   name,
   required,
   ...props
-}: TextAreaFieldProps) {
+}: TextAreaProps) {
   return (
     <Field.Root className={fieldRoot} name={name}>
       <Field.Label className={fieldLabel}>

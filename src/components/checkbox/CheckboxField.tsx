@@ -1,4 +1,4 @@
-import { Checkbox } from "@/components/shared/base-ui";
+import { Checkbox as BaseCheckbox } from "@/components/shared/base-ui";
 import {
   choiceContent,
   choiceDescription,
@@ -11,20 +11,13 @@ import { CheckIcon, MinusIcon } from "@/components/shared/icons";
 
 import { checkbox, indicator } from "./CheckboxField.css";
 
-export type CheckboxFieldProps = {
-  checked?: boolean;
-  defaultChecked?: boolean;
+export type CheckboxProps = Omit<BaseCheckbox.Root.Props, "children" | "className"> & {
   description?: string;
-  disabled?: boolean;
   error?: string;
-  indeterminate?: boolean;
   label: string;
-  name?: string;
-  onCheckedChange?: (checked: boolean) => void;
-  required?: boolean;
 };
 
-export function CheckboxField({
+export function Checkbox({
   checked,
   defaultChecked,
   description,
@@ -35,11 +28,11 @@ export function CheckboxField({
   name,
   onCheckedChange,
   required,
-}: CheckboxFieldProps) {
+}: CheckboxProps) {
   return (
     <div className={choiceRoot}>
       <label className={choiceLabel}>
-        <Checkbox.Root
+        <BaseCheckbox.Root
           checked={checked}
           className={checkbox}
           defaultChecked={defaultChecked}
@@ -49,10 +42,10 @@ export function CheckboxField({
           onCheckedChange={onCheckedChange}
           required={required}
         >
-          <Checkbox.Indicator className={indicator}>
+          <BaseCheckbox.Indicator className={indicator}>
             {indeterminate ? <MinusIcon /> : <CheckIcon />}
-          </Checkbox.Indicator>
-        </Checkbox.Root>
+          </BaseCheckbox.Indicator>
+        </BaseCheckbox.Root>
 
         <span className={choiceContent}>
           <span className={choiceTitle}>{label}</span>

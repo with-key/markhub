@@ -1,4 +1,5 @@
-import { Combobox } from "@/components/shared/base-ui";
+import { Combobox as BaseCombobox } from "@/components/shared/base-ui";
+import { ComboboxPrimitive } from "./Combobox";
 import {
   emptyState,
   icon,
@@ -22,29 +23,25 @@ import {
 } from "@/components/shared/field.css";
 import { CheckIcon, ChevronDownIcon } from "@/components/shared/icons";
 
-export type ComboboxFieldItem = {
+export type ComboboxItem = {
   description?: string;
   keywords?: string[];
   label: string;
   value: string;
 };
 
-export type ComboboxFieldProps = {
-  defaultValue?: string | null;
+export type ComboboxProps = Omit<
+  BaseCombobox.Root.Props<string | null>,
+  "children" | "className" | "items" | "itemToStringLabel" | "filter"
+> & {
   description?: string;
-  disabled?: boolean;
   error?: string;
-  id?: string;
-  items: ComboboxFieldItem[];
+  items: ComboboxItem[];
   label: string;
-  name?: string;
-  onValueChange?: (value: string | null) => void;
   placeholder?: string;
-  required?: boolean;
-  value?: string | null;
 };
 
-export function ComboboxField({
+export function Combobox({
   defaultValue,
   description,
   disabled,
@@ -57,11 +54,11 @@ export function ComboboxField({
   placeholder = "검색 후 바로 선택하세요",
   required,
   value,
-}: ComboboxFieldProps) {
+}: ComboboxProps) {
   const itemMap = new Map(items.map((item) => [item.value, item]));
 
   return (
-    <Combobox.Root
+    <ComboboxPrimitive.Root
       autoHighlight
       defaultValue={defaultValue}
       disabled={disabled}
@@ -87,44 +84,44 @@ export function ComboboxField({
       value={value}
     >
       <div className={fieldRoot}>
-        <Combobox.Label className={fieldLabel}>
+        <ComboboxPrimitive.Label className={fieldLabel}>
           {label}
           {required ? " *" : null}
-        </Combobox.Label>
+        </ComboboxPrimitive.Label>
         {description ? <p className={fieldDescription}>{description}</p> : null}
 
-        <Combobox.InputGroup className={inputGroup}>
-          <Combobox.Input className={input} placeholder={placeholder} />
-          <Combobox.Trigger className={iconButton} aria-label={`${label} 열기`}>
+        <ComboboxPrimitive.InputGroup className={inputGroup}>
+          <ComboboxPrimitive.Input className={input} placeholder={placeholder} />
+          <ComboboxPrimitive.Trigger className={iconButton} aria-label={`${label} 열기`}>
             <ChevronDownIcon className={icon} />
-          </Combobox.Trigger>
-        </Combobox.InputGroup>
+          </ComboboxPrimitive.Trigger>
+        </ComboboxPrimitive.InputGroup>
 
         {error ? <p className={fieldError}>{error}</p> : null}
       </div>
 
-      <Combobox.Portal>
-        <Combobox.Positioner className={positioner} sideOffset={8}>
-          <Combobox.Popup className={popup}>
-            <Combobox.List className={list}>
+      <ComboboxPrimitive.Portal>
+        <ComboboxPrimitive.Positioner className={positioner} sideOffset={8}>
+          <ComboboxPrimitive.Popup className={popup}>
+            <ComboboxPrimitive.List className={list}>
               {items.map((item) => (
-                <Combobox.Item key={item.value} className={listItem} value={item.value}>
+                <ComboboxPrimitive.Item key={item.value} className={listItem} value={item.value}>
                   <span className={listItemBody}>
                     <span className={listItemLabel}>{item.label}</span>
                     {item.description ? (
                       <span className={listItemDescription}>{item.description}</span>
                     ) : null}
                   </span>
-                  <Combobox.ItemIndicator className={listItemIndicator}>
+                  <ComboboxPrimitive.ItemIndicator className={listItemIndicator}>
                     <CheckIcon />
-                  </Combobox.ItemIndicator>
-                </Combobox.Item>
+                  </ComboboxPrimitive.ItemIndicator>
+                </ComboboxPrimitive.Item>
               ))}
-            </Combobox.List>
-            <Combobox.Empty className={emptyState}>조건에 맞는 결과가 없습니다.</Combobox.Empty>
-          </Combobox.Popup>
-        </Combobox.Positioner>
-      </Combobox.Portal>
-    </Combobox.Root>
+            </ComboboxPrimitive.List>
+            <ComboboxPrimitive.Empty className={emptyState}>조건에 맞는 결과가 없습니다.</ComboboxPrimitive.Empty>
+          </ComboboxPrimitive.Popup>
+        </ComboboxPrimitive.Positioner>
+      </ComboboxPrimitive.Portal>
+    </ComboboxPrimitive.Root>
   );
 }

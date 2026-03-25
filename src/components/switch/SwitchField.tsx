@@ -1,4 +1,4 @@
-import { Switch } from "@/components/shared/base-ui";
+import { Switch as BaseSwitch } from "@/components/shared/base-ui";
 import {
   choiceContent,
   choiceDescription,
@@ -10,19 +10,13 @@ import {
 
 import { switchRoot, switchThumb } from "./SwitchField.css";
 
-export type SwitchFieldProps = {
-  checked?: boolean;
-  defaultChecked?: boolean;
+export type SwitchProps = Omit<BaseSwitch.Root.Props, "children" | "className"> & {
   description?: string;
-  disabled?: boolean;
   error?: string;
   label: string;
-  name?: string;
-  onCheckedChange?: (checked: boolean) => void;
-  required?: boolean;
 };
 
-export function SwitchField({
+export function Switch({
   checked,
   defaultChecked,
   description,
@@ -32,11 +26,11 @@ export function SwitchField({
   name,
   onCheckedChange,
   required,
-}: SwitchFieldProps) {
+}: SwitchProps) {
   return (
     <div className={choiceRoot}>
       <label className={choiceLabel}>
-        <Switch.Root
+        <BaseSwitch.Root
           checked={checked}
           className={switchRoot}
           defaultChecked={defaultChecked}
@@ -45,8 +39,8 @@ export function SwitchField({
           onCheckedChange={onCheckedChange}
           required={required}
         >
-          <Switch.Thumb className={switchThumb} />
-        </Switch.Root>
+          <BaseSwitch.Thumb className={switchThumb} />
+        </BaseSwitch.Root>
 
         <span className={choiceContent}>
           <span className={choiceTitle}>{label}</span>
