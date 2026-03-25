@@ -5,13 +5,15 @@ import { vars } from "@/styles/global.css";
 export const switchRoot = style({
   position: "relative",
   width: "44px",
-  height: "26px",
+  height: "24px",
   borderRadius: vars.radius.pill,
   background: vars.color.surfaceHigh,
-  transition: "background-color 160ms ease, box-shadow 160ms ease",
+  border: `1px solid ${vars.color.outlineVariant}`,
+  transition: "background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease",
   selectors: {
     "&[data-checked]": {
-      background: vars.color.accent,
+      background: vars.color.foreground,
+      borderColor: vars.color.foreground,
       boxShadow: `0 0 0 4px color-mix(in srgb, ${vars.color.accent} 12%, transparent)`,
     },
     "&:focus-visible": {
@@ -26,17 +28,17 @@ export const switchRoot = style({
 
 export const switchThumb = style({
   position: "absolute",
-  top: "3px",
-  left: "3px",
-  width: "20px",
-  height: "20px",
+  top: "2px",
+  left: "2px",
+  width: "18px",
+  height: "18px",
   borderRadius: vars.radius.pill,
   background: vars.color.surface,
-  boxShadow: "0 2px 8px rgba(16, 32, 51, 0.18)",
+  boxShadow: "0 1px 2px rgba(0, 0, 0, 0.12)",
   transition: "transform 160ms ease",
   selectors: {
     "[data-checked] &": {
-      transform: "translateX(18px)",
+      transform: "translateX(20px)",
     },
   },
 });

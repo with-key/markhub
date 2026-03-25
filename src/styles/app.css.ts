@@ -1,12 +1,23 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 import { vars } from "./global.css";
+import {
+  bodyMd,
+  bodySm,
+  eyebrow,
+  heroTitle,
+  labelMd,
+  labelSm,
+  labelXs,
+  titleLg,
+  titleMd,
+  titleSm,
+} from "./typography.css";
 
 export const authPage = style({
   minHeight: "100vh",
   display: "grid",
-  gridTemplateColumns: "minmax(0, 1.15fr) minmax(360px, 460px)",
-  background:
-    "linear-gradient(135deg, color-mix(in srgb, var(--background) 74%, #edf6ff 26%) 0%, color-mix(in srgb, var(--background) 86%, #fff4df 14%) 100%)",
+  gridTemplateColumns: "minmax(0, 1fr) minmax(360px, 440px)",
+  background: vars.color.background,
   "@media": {
     "screen and (max-width: 980px)": {
       gridTemplateColumns: "1fr",
@@ -16,29 +27,26 @@ export const authPage = style({
 
 export const authHero = style({
   position: "relative",
-  overflow: "hidden",
-  padding: "72px 64px",
+  padding: "56px 56px 48px",
   display: "grid",
   alignContent: "space-between",
-  gap: "40px",
+  gap: vars.space[6],
+  borderRight: `1px solid ${vars.color.outlineVariant}`,
   background:
-    "radial-gradient(circle at top left, rgba(11, 101, 255, 0.16), transparent 38%), radial-gradient(circle at bottom right, rgba(255, 169, 77, 0.18), transparent 32%)",
+    "radial-gradient(circle at top left, color-mix(in srgb, var(--surfaceHigh) 58%, transparent) 0%, transparent 42%)",
   "@media": {
     "screen and (max-width: 980px)": {
-      padding: "40px 24px 24px",
+      padding: "32px 24px 20px",
+      borderRight: 0,
+      borderBottom: `1px solid ${vars.color.outlineVariant}`,
     },
   },
 });
 
-export const authKicker = style({
+export const authKicker = style([eyebrow, {
   margin: 0,
-  color: vars.color.accentStrong,
-  fontFamily: vars.font.display,
-  fontSize: "0.82rem",
-  fontWeight: 700,
-  letterSpacing: "0.2em",
-  textTransform: "uppercase",
-});
+  color: vars.color.muted,
+}]);
 
 export const authHeroBody = style({
   maxWidth: "34rem",
@@ -46,75 +54,65 @@ export const authHeroBody = style({
   gap: "24px",
 });
 
-export const authTitle = style({
+export const authTitle = style([heroTitle, {
   margin: 0,
-  fontFamily: vars.font.display,
-  fontSize: "clamp(3rem, 7vw, 5.75rem)",
-  lineHeight: 0.95,
-  letterSpacing: "-0.06em",
-});
+}]);
 
-export const authDescription = style({
+export const authDescription = style([bodyMd, {
   margin: 0,
-  maxWidth: "32rem",
+  maxWidth: "28rem",
   color: vars.color.muted,
-  fontSize: "1.05rem",
-  lineHeight: 1.8,
-});
+}]);
 
 export const authHighlights = style({
   display: "grid",
   gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-  gap: "16px",
+  gap: vars.space[3],
   "@media": {
-    "screen and (max-width: 680px)": {
+    "screen and (max-width: 820px)": {
       gridTemplateColumns: "1fr",
     },
   },
 });
 
 export const authHighlightCard = style({
-  padding: vars.space[5],
-  border: `1px solid ${vars.color.border}`,
-  borderRadius: vars.radius.xl,
-  background: "color-mix(in srgb, var(--surface) 84%, transparent)",
-  backdropFilter: "blur(12px)",
+  padding: vars.space[4],
+  border: `1px solid ${vars.color.outlineVariant}`,
+  borderRadius: vars.radius.lg,
+  background: vars.color.surface,
 });
 
-export const authHighlightLabel = style({
-  margin: "0 0 8px",
+export const authHighlightLabel = style([labelXs, {
+  margin: 0,
   color: vars.color.muted,
-  fontSize: "0.82rem",
-  fontWeight: 600,
-});
+}]);
 
-export const authHighlightValue = style({
+export const authHighlightValue = style([labelMd, {
   margin: 0,
   fontFamily: vars.font.display,
-  fontSize: "1.35rem",
-  fontWeight: 700,
-});
+  letterSpacing: vars.text.tracking.snug,
+}]);
 
 export const authPanel = style({
   display: "grid",
   alignItems: "center",
-  padding: "40px",
+  padding: "32px",
   "@media": {
     "screen and (max-width: 980px)": {
-      padding: "24px 24px 40px",
+      padding: "24px",
     },
   },
 });
 
 export const authCard = style({
   width: "100%",
-  maxWidth: "440px",
+  maxWidth: "400px",
   justifySelf: "center",
-  padding: "36px",
-  borderRadius: vars.radius["2xl"],
-  border: `1px solid ${vars.color.border}`,
-  background: "color-mix(in srgb, var(--surface) 94%, transparent)",
-  boxShadow: vars.shadow.elevated,
+  padding: vars.space[6],
+  borderRadius: vars.radius.xl,
+  border: `1px solid ${vars.color.outlineVariant}`,
+  background: vars.color.surface,
+  boxShadow: vars.shadow.soft,
 });
 
 export const authStack = style({
@@ -122,18 +120,15 @@ export const authStack = style({
   gap: "16px",
 });
 
-export const authHeading = style({
+export const authHeading = style([titleMd, {
   margin: 0,
-  fontFamily: vars.font.display,
-  fontSize: "2rem",
-  letterSpacing: "-0.04em",
-});
+}]);
 
-export const authSubheading = style({
+export const authSubheading = style([bodyMd, {
   margin: 0,
   color: vars.color.muted,
-  lineHeight: 1.7,
-});
+  lineHeight: vars.text.lineHeight.relaxed,
+}]);
 
 export const oauthButton = style({
   width: "100%",
@@ -141,20 +136,25 @@ export const oauthButton = style({
   alignItems: "center",
   justifyContent: "space-between",
   gap: "12px",
-  padding: "16px 18px",
+  minHeight: "48px",
+  padding: "0 16px",
   borderRadius: vars.radius.md,
-  border: `1px solid ${vars.color.border}`,
+  border: `1px solid ${vars.color.outlineVariant}`,
   background: vars.color.surface,
   color: vars.color.foreground,
   font: "inherit",
   fontWeight: 600,
   cursor: "pointer",
-  transition: "transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease",
+  transition: "background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease",
   selectors: {
     "&:hover": {
-      transform: "translateY(-1px)",
-      borderColor: vars.color.accent,
-      boxShadow: "0 14px 32px rgba(11, 101, 255, 0.1)",
+      background: vars.color.surfaceLow,
+      borderColor: vars.color.foreground,
+    },
+    "&:focus-visible": {
+      outline: "none",
+      borderColor: vars.color.foreground,
+      boxShadow: `0 0 0 4px color-mix(in srgb, ${vars.color.surfaceTint} 14%, transparent)`,
     },
   },
 });
@@ -166,26 +166,145 @@ export const oauthMeta = style({
 });
 
 export const oauthLabel = style({
-  fontSize: "1rem",
+  fontSize: vars.text.size.md,
 });
 
 export const oauthCaption = style({
   color: vars.color.muted,
-  fontSize: "0.86rem",
-  fontWeight: 500,
+  fontSize: vars.text.size.sm,
+  fontWeight: vars.text.weight.medium,
 });
 
-export const authFootnote = style({
+export const authFootnote = style([bodySm, {
   margin: 0,
   color: vars.color.muted,
-  fontSize: "0.86rem",
-  lineHeight: 1.6,
-});
+}]);
 
 export const dashboardPage = style({
   minHeight: "100vh",
   background:
     "linear-gradient(180deg, color-mix(in srgb, var(--background) 90%, #eef5ff 10%) 0%, var(--background) 100%)",
+});
+
+export const dashboardMain = style({
+  padding: "24px",
+  display: "grid",
+  gap: "16px",
+  "@media": {
+    "screen and (max-width: 720px)": {
+      padding: "16px",
+      gap: "12px",
+    },
+  },
+});
+
+export const homeHeroSurface = style({
+  display: "grid",
+  gridTemplateColumns: "minmax(0, 1.45fr) auto",
+  alignItems: "end",
+  gap: "16px",
+  "@media": {
+    "screen and (max-width: 900px)": {
+      gridTemplateColumns: "1fr",
+      alignItems: "start",
+    },
+  },
+});
+
+export const homeIntro = style({
+  display: "grid",
+  gap: "8px",
+  maxWidth: "46rem",
+});
+
+export const homeEyebrow = style([eyebrow, {
+  margin: 0,
+  color: vars.color.muted,
+}]);
+
+export const homeTitle = style([titleLg, {
+  margin: 0,
+  fontSize: "clamp(1.8rem, 3vw, 2.5rem)",
+  lineHeight: vars.text.lineHeight.compact,
+}]);
+
+export const homeDescription = style([bodySm, {
+  margin: 0,
+  maxWidth: "42rem",
+  color: vars.color.muted,
+}]);
+
+export const homeActionRow = style({
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
+  flexWrap: "wrap",
+  justifyContent: "flex-end",
+  "@media": {
+    "screen and (max-width: 900px)": {
+      justifyContent: "flex-start",
+    },
+  },
+});
+
+export const homeSectionSurface = style({
+  display: "grid",
+  gap: "14px",
+});
+
+export const homeSectionHeader = style({
+  gap: "6px",
+});
+
+export const homeProjectList = style({
+  display: "grid",
+  gap: "10px",
+});
+
+export const homeProjectCard = style({
+  display: "grid",
+  gap: "10px",
+  padding: "14px",
+  borderRadius: vars.radius.md,
+  border: `1px solid ${vars.color.border}`,
+  background: vars.color.surface,
+});
+
+export const homeProjectHeader = style({
+  display: "flex",
+  alignItems: "start",
+  justifyContent: "space-between",
+  gap: "10px",
+});
+
+export const homeProjectTitleLink = style([labelMd, {
+  color: vars.color.foreground,
+  textDecoration: "none",
+  lineHeight: 1.35,
+}]);
+
+export const homeProjectText = style([bodySm, {
+  margin: 0,
+  color: vars.color.muted,
+}]);
+
+export const homeProjectMeta = style({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "8px",
+});
+
+export const compactChip = style({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "6px",
+  minHeight: "26px",
+  padding: "0 9px",
+  borderRadius: vars.radius.sm,
+  background: vars.color.surfaceRaised,
+  fontSize: vars.text.size.xs,
+  fontWeight: vars.text.weight.bold,
+  letterSpacing: "-0.01em",
 });
 
 export const shell = style({
@@ -223,30 +342,21 @@ export const brandBlock = style({
   gap: "8px",
 });
 
-export const brandEyebrow = style({
+export const brandEyebrow = style([eyebrow, {
   margin: 0,
   color: vars.color.accentStrong,
-  fontFamily: vars.font.display,
-  fontSize: "0.8rem",
-  fontWeight: 700,
   letterSpacing: "0.18em",
-  textTransform: "uppercase",
-});
+}]);
 
-export const brandTitle = style({
+export const brandTitle = style([titleLg, {
   margin: 0,
-  fontFamily: vars.font.display,
-  fontSize: "1.65rem",
-  fontWeight: 700,
-  letterSpacing: "-0.04em",
-});
+  fontSize: vars.text.size["2xl"],
+}]);
 
-export const brandDescription = style({
+export const brandDescription = style([bodySm, {
   margin: 0,
   color: vars.color.muted,
-  fontSize: "0.92rem",
-  lineHeight: 1.6,
-});
+}]);
 
 export const projectBadge = style({
   display: "inline-flex",
@@ -256,8 +366,8 @@ export const projectBadge = style({
   borderRadius: vars.radius.pill,
   background: vars.color.surfaceRaised,
   color: vars.color.foreground,
-  fontSize: "0.88rem",
-  fontWeight: 600,
+  fontSize: vars.text.size.sm,
+  fontWeight: vars.text.weight.semibold,
 });
 
 export const navList = style({
@@ -302,21 +412,15 @@ export const sidebarMetaCard = style({
   border: `1px solid ${vars.color.border}`,
 });
 
-export const sidebarMetaLabel = style({
+export const sidebarMetaLabel = style([labelXs, {
   margin: "0 0 6px",
   color: vars.color.muted,
-  fontSize: "0.78rem",
-  fontWeight: 600,
-  textTransform: "uppercase",
-  letterSpacing: "0.08em",
-});
+}]);
 
-export const sidebarMetaValue = style({
+export const sidebarMetaValue = style([labelMd, {
   margin: 0,
-  fontSize: "0.95rem",
-  fontWeight: 600,
   lineHeight: 1.5,
-});
+}]);
 
 export const content = style({
   padding: "32px",
@@ -342,29 +446,24 @@ export const pageIntro = style({
   gap: "10px",
 });
 
-export const pageEyebrow = style({
+export const pageEyebrow = style([eyebrow, {
   margin: 0,
   color: vars.color.muted,
-  fontSize: "0.82rem",
-  fontWeight: 700,
   letterSpacing: "0.12em",
-  textTransform: "uppercase",
-});
+}]);
 
-export const pageTitle = style({
+export const pageTitle = style([heroTitle, {
   margin: 0,
-  fontFamily: vars.font.display,
-  fontSize: "clamp(2rem, 4vw, 3rem)",
   lineHeight: 1.02,
-  letterSpacing: "-0.05em",
-});
+  fontSize: "clamp(2rem, 4vw, 3rem)",
+}]);
 
-export const pageDescription = style({
+export const pageDescription = style([bodyMd, {
   margin: 0,
   maxWidth: "48rem",
   color: vars.color.muted,
-  lineHeight: 1.7,
-});
+  lineHeight: vars.text.lineHeight.relaxed,
+}]);
 
 export const actionRow = style({
   display: "flex",
@@ -425,20 +524,16 @@ export const metricCard = style({
   border: `1px solid ${vars.color.border}`,
 });
 
-export const metricLabel = style({
+export const metricLabel = style([labelSm, {
   margin: "0 0 8px",
   color: vars.color.muted,
-  fontSize: "0.86rem",
-  fontWeight: 600,
-});
+}]);
 
-export const metricValue = style({
+export const metricValue = style([titleLg, {
   margin: 0,
-  fontFamily: vars.font.display,
   fontSize: "2rem",
-  fontWeight: 700,
-  letterSpacing: "-0.04em",
-});
+  fontVariantNumeric: "tabular-nums",
+}]);
 
 export const splitGrid = style({
   display: "grid",
@@ -472,18 +567,16 @@ export const itemHeader = style({
   gap: "12px",
 });
 
-export const itemTitleLink = style({
+export const itemTitleLink = style([labelMd, {
   color: vars.color.foreground,
   textDecoration: "none",
-  fontSize: "1rem",
-  fontWeight: 700,
-});
+}]);
 
-export const itemText = style({
+export const itemText = style([bodyMd, {
   margin: 0,
   color: vars.color.muted,
-  lineHeight: 1.7,
-});
+  lineHeight: vars.text.lineHeight.relaxed,
+}]);
 
 export const itemMeta = style({
   display: "flex",
@@ -498,8 +591,8 @@ export const chip = style({
   padding: "6px 10px",
   borderRadius: vars.radius.pill,
   background: vars.color.surfaceRaised,
-  fontSize: "0.8rem",
-  fontWeight: 700,
+  fontSize: vars.text.size.xs,
+  fontWeight: vars.text.weight.bold,
 });
 
 export const chipMuted = style({
@@ -569,26 +662,20 @@ export const stepActive = style({
   background: vars.color.accentSoft,
 });
 
-export const stepLabel = style({
+export const stepLabel = style([labelXs, {
   margin: "0 0 6px",
   color: vars.color.muted,
-  fontSize: "0.8rem",
-  fontWeight: 700,
-  textTransform: "uppercase",
-  letterSpacing: "0.08em",
-});
+}]);
 
 export const stepTitle = style({
   margin: 0,
-  fontWeight: 700,
+  fontWeight: vars.text.weight.bold,
 });
 
-export const stepText = style({
+export const stepText = style([bodySm, {
   margin: "8px 0 0",
   color: vars.color.muted,
-  fontSize: "0.88rem",
-  lineHeight: 1.6,
-});
+}]);
 
 export const detailGrid = style({
   display: "grid",
@@ -603,7 +690,7 @@ export const detailGrid = style({
 
 export const prose = style({
   color: vars.color.foreground,
-  lineHeight: 1.8,
+  lineHeight: vars.text.lineHeight.prose,
 });
 
 globalStyle(`${prose} h1, ${prose} h2, ${prose} h3`, {
@@ -614,11 +701,11 @@ globalStyle(`${prose} h1, ${prose} h2, ${prose} h3`, {
 });
 
 globalStyle(`${prose} h1`, {
-  fontSize: "1.8rem",
+  fontSize: vars.text.size["3xl"],
 });
 
 globalStyle(`${prose} h2`, {
-  fontSize: "1.35rem",
+  fontSize: vars.text.size.xl,
 });
 
 globalStyle(`${prose} p, ${prose} ul, ${prose} ol`, {
@@ -647,12 +734,10 @@ export const relationTitle = style({
   fontWeight: 700,
 });
 
-export const relationText = style({
+export const relationText = style([bodySm, {
   margin: 0,
   color: vars.color.muted,
-  fontSize: "0.92rem",
-  lineHeight: 1.6,
-});
+}]);
 
 export const markdownGrid = style({
   display: "grid",
@@ -672,12 +757,9 @@ export const editorPane = style({
   background: vars.color.surface,
 });
 
-export const editorTitle = style({
+export const editorTitle = style([titleSm, {
   margin: "0 0 12px",
-  fontFamily: vars.font.display,
-  fontSize: "1.15rem",
-  fontWeight: 700,
-});
+}]);
 
 export const markdownTextarea = style({
   width: "100%",
@@ -688,8 +770,8 @@ export const markdownTextarea = style({
   background: vars.color.surfaceRaised,
   color: vars.color.foreground,
   fontFamily: vars.font.mono,
-  fontSize: "0.95rem",
-  lineHeight: 1.7,
+  fontSize: vars.text.size.md,
+  lineHeight: vars.text.lineHeight.relaxed,
   resize: "vertical",
 });
 
@@ -706,13 +788,11 @@ export const emptyState = style({
   borderRadius: vars.radius.xl,
   border: `1px dashed ${vars.color.border}`,
   color: vars.color.muted,
-  lineHeight: 1.7,
+  lineHeight: vars.text.lineHeight.relaxed,
   background: vars.color.surfaceRaised,
 });
 
-export const smallText = style({
+export const smallText = style([bodySm, {
   margin: 0,
   color: vars.color.muted,
-  fontSize: "0.88rem",
-  lineHeight: 1.6,
-});
+}]);

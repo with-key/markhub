@@ -4,7 +4,7 @@ import { vars } from "@/styles/global.css";
 
 export const surface = recipe({
   base: {
-    border: `1px solid ${vars.color.border}`,
+    border: `1px solid ${vars.color.outlineVariant}`,
   },
   variants: {
     variant: {
@@ -13,13 +13,13 @@ export const surface = recipe({
         borderRadius: vars.radius.lg,
       },
       panel: {
-        background: "color-mix(in srgb, var(--surface) 95%, transparent)",
-        borderRadius: vars.radius["2xl"],
+        background: vars.color.surface,
+        borderRadius: vars.radius.xl,
         boxShadow: vars.shadow.soft,
       },
       subtle: {
         background: vars.color.surfaceRaised,
-        borderRadius: vars.radius.xl,
+        borderRadius: vars.radius.lg,
       },
     },
     padding: {

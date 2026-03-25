@@ -11,8 +11,8 @@ export const textArea = style({
   background: vars.color.surface,
   color: vars.color.foreground,
   fontFamily: vars.font.body,
-  fontSize: "1rem",
-  lineHeight: 1.7,
+  fontSize: vars.text.size.md,
+  lineHeight: vars.text.lineHeight.relaxed,
   resize: "vertical",
   transition: "border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease",
   selectors: {
@@ -21,7 +21,7 @@ export const textArea = style({
     },
     "&:focus-visible": {
       outline: "none",
-      borderColor: vars.color.surfaceTint,
+      borderColor: vars.color.foreground,
       boxShadow: `0 0 0 4px color-mix(in srgb, ${vars.color.surfaceTint} 16%, transparent)`,
     },
   },

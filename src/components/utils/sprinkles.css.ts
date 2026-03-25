@@ -1,6 +1,5 @@
-import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
-
 import { vars } from "@/styles/global.css";
+import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
 
 const conditions = {
   mobile: {},
@@ -38,36 +37,121 @@ const columns = {
   sidebar: "minmax(220px, 280px) minmax(0, 1fr)",
 } as const;
 
+// const fontSize = {
+//   xs: vars.text.size.xs,
+//   sm: vars.text.size.sm,
+//   md: vars.text.size.md,
+//   lg: vars.text.size.lg,
+//   xl: vars.text.size.xl,
+//   "2xl": vars.text.size["2xl"],
+//   "3xl": vars.text.size["3xl"],
+// } as const;
+
+const typography = {
+  heading01: {
+    fontFamily: vars.font.display,
+    fontSize: vars.text.size.hero,
+    fontWeight: vars.text.weight.bold,
+    lineHeight: "0.98",
+    letterSpacing: "-0.05em",
+  },
+  heading02: {
+    fontFamily: vars.font.display,
+    fontSize: vars.text.size["2xl"],
+    lineHeight: vars.text.lineHeight.compact,
+    fontWeight: vars.text.weight.bold,
+    letterSpacing: vars.text.tracking.tight,
+  },
+  heading03: {
+    fontFamily: vars.font.display,
+    fontSize: vars.text.size.xl,
+    lineHeight: vars.text.lineHeight.heading,
+    fontWeight: vars.text.weight.semibold,
+    letterSpacing: vars.text.tracking.tight,
+  },
+  heading04: {
+    fontFamily: vars.font.display,
+    fontSize: vars.text.size.lg,
+    lineHeight: vars.text.lineHeight.heading,
+    fontWeight: vars.text.weight.semibold,
+    letterSpacing: vars.text.tracking.snug,
+  },
+  body01: {
+    fontFamily: vars.font.body,
+    fontSize: vars.text.size.md,
+    lineHeight: vars.text.lineHeight.body,
+    fontWeight: vars.text.weight.regular,
+    letterSpacing: vars.text.tracking.normal,
+  },
+  body02: {
+    fontFamily: vars.font.body,
+    fontSize: vars.text.size.sm,
+    lineHeight: vars.text.lineHeight.body,
+    fontWeight: vars.text.weight.regular,
+    letterSpacing: vars.text.tracking.normal,
+  },
+  body03: {
+    fontFamily: vars.font.body,
+    fontSize: vars.text.size.xs,
+    lineHeight: vars.text.lineHeight.body,
+    fontWeight: vars.text.weight.regular,
+    letterSpacing: vars.text.tracking.normal,
+  },
+  label01: {
+    fontFamily: vars.font.body,
+    fontSize: vars.text.size.md,
+    lineHeight: vars.text.lineHeight.heading,
+    fontWeight: vars.text.weight.semibold,
+    letterSpacing: vars.text.tracking.normal,
+  },
+  label02: {
+    fontFamily: vars.font.body,
+    fontSize: vars.text.size.sm,
+    lineHeight: vars.text.lineHeight.heading,
+    fontWeight: vars.text.weight.semibold,
+    letterSpacing: vars.text.tracking.normal,
+  },
+  label03: {
+    fontFamily: vars.font.body,
+    fontSize: vars.text.size.xs,
+    lineHeight: vars.text.lineHeight.heading,
+    fontWeight: vars.text.weight.semibold,
+    letterSpacing: vars.text.tracking.wide,
+    textTransform: "uppercase",
+  },
+  overline01: {
+    fontFamily: vars.font.display,
+    fontSize: vars.text.size.xs,
+    fontWeight: vars.text.weight.bold,
+    lineHeight: vars.text.lineHeight.heading,
+    letterSpacing: vars.text.tracking.caps,
+    textTransform: "uppercase",
+  },
+  code01: {
+    fontFamily: vars.font.mono,
+    fontSize: vars.text.size.sm,
+    fontWeight: vars.text.weight.medium,
+    lineHeight: vars.text.lineHeight.relaxed,
+    fontVariantLigatures: "none",
+  },
+} as const;
+
 const layoutProperties = defineProperties({
   conditions,
-  defaultCondition: "mobile",
+  defaultCondition: "desktop",
   properties: {
+    typography,
     display: ["none", "block", "inline-block", "inline-flex", "flex", "grid"],
     position: ["static", "relative", "absolute", "sticky", "fixed"],
     overflow: ["hidden", "auto", "scroll", "visible"],
     overflowX: ["hidden", "auto", "scroll", "visible"],
     overflowY: ["hidden", "auto", "scroll", "visible"],
     width: size,
-    minWidth: {
-      0: "0",
-      ...size,
-    },
-    maxWidth: {
-      none: "none",
-      full: "100%",
-      prose: "72ch",
-    },
+    minWidth: { 0: "0", ...size },
+    maxWidth: { none: "none", full: "100%", prose: "72ch" },
     height: size,
-    minHeight: {
-      0: "0",
-      full: "100%",
-      screen: "100vh",
-    },
-    maxHeight: {
-      none: "none",
-      full: "100%",
-      screen: "100vh",
-    },
+    minHeight: { 0: "0", full: "100%", screen: "100vh" },
+    maxHeight: { none: "none", full: "100%", screen: "100vh" },
     flexDirection: ["row", "row-reverse", "column", "column-reverse"],
     flexWrap: ["nowrap", "wrap", "wrap-reverse"],
     justifyContent: [
@@ -79,8 +163,21 @@ const layoutProperties = defineProperties({
       "space-evenly",
     ],
     alignItems: ["stretch", "flex-start", "center", "flex-end", "baseline"],
-    alignContent: ["stretch", "flex-start", "center", "flex-end", "space-between"],
-    alignSelf: ["auto", "stretch", "flex-start", "center", "flex-end", "baseline"],
+    alignContent: [
+      "stretch",
+      "flex-start",
+      "center",
+      "flex-end",
+      "space-between",
+    ],
+    alignSelf: [
+      "auto",
+      "stretch",
+      "flex-start",
+      "center",
+      "flex-end",
+      "baseline",
+    ],
     justifySelf: ["auto", "start", "center", "end", "stretch"],
     justifyItems: ["start", "center", "end", "stretch"],
     placeItems: ["start", "center", "end", "stretch"],
@@ -101,22 +198,10 @@ const layoutProperties = defineProperties({
     paddingRight: spacing,
     paddingBottom: spacing,
     paddingLeft: spacing,
-    marginTop: {
-      auto: "auto",
-      ...spacing,
-    },
-    marginRight: {
-      auto: "auto",
-      ...spacing,
-    },
-    marginBottom: {
-      auto: "auto",
-      ...spacing,
-    },
-    marginLeft: {
-      auto: "auto",
-      ...spacing,
-    },
+    marginTop: { auto: "auto", ...spacing },
+    marginRight: { auto: "auto", ...spacing },
+    marginBottom: { auto: "auto", ...spacing },
+    marginLeft: { auto: "auto", ...spacing },
     inset: spacing,
     top: spacing,
     right: spacing,
@@ -124,6 +209,15 @@ const layoutProperties = defineProperties({
     left: spacing,
     gridTemplateColumns: columns,
     gridAutoFlow: ["row", "column", "dense", "row dense", "column dense"],
+    letterSpacing: {
+      tight: vars.text.tracking.tight,
+      snug: vars.text.tracking.snug,
+      normal: vars.text.tracking.normal,
+      wide: vars.text.tracking.wide,
+      caps: vars.text.tracking.caps,
+    },
+    textAlign: ["left", "center", "right"],
+    textTransform: ["none", "uppercase"],
     gridColumn: {
       auto: "auto",
       span1: "span 1 / span 1",
@@ -197,6 +291,13 @@ export const sprinklePropNames = [
   "left",
   "gridTemplateColumns",
   "gridAutoFlow",
+  "fontFamily",
+  "fontSize",
+  "fontWeight",
+  "lineHeight",
+  "letterSpacing",
+  "textAlign",
+  "textTransform",
   "gridColumn",
   "gridRow",
   "p",

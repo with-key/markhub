@@ -13,4 +13,5 @@ export * from "./surface";
 export * from "./switch";
 export * from "./text-area-field";
 export * from "./text-field";
+export * from "./typography";
 export * from "./utils";

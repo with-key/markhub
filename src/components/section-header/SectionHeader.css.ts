@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 import { vars } from "@/styles/global.css";
+import { bodySm, titleSm } from "@/styles/typography.css";
 
 export const sectionHeaderRoot = style({
   display: "grid",
@@ -15,16 +16,11 @@ export const sectionHeaderTop = style({
   flexWrap: "wrap",
 });
 
-export const sectionHeaderTitle = style({
+export const sectionHeaderTitle = style([titleSm, {
   margin: 0,
-  fontFamily: vars.font.display,
-  fontSize: "1.25rem",
-  fontWeight: 700,
-  letterSpacing: "-0.03em",
-});
+}]);
 
-export const sectionHeaderDescription = style({
+export const sectionHeaderDescription = style([bodySm, {
   margin: 0,
   color: vars.color.muted,
-  lineHeight: 1.6,
-});
+}]);

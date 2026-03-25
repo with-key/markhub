@@ -1,6 +1,5 @@
-import type { Ref } from "react";
 import { useRender } from "@base-ui/react/use-render";
-
+import type { Ref } from "react";
 import { sprinkles } from "./sprinkles.css";
 import type { UtilityOwnProps, UtilityProps } from "./types";
 import { cx, splitSprinklesProps } from "./utils";
